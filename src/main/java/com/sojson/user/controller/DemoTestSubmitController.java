@@ -1,10 +1,8 @@
 package com.sojson.user.controller;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import com.sojson.common.controller.BaseController;
+import com.sojson.common.utils.MathUtil;
+import com.sojson.user.bo.SubmitDto;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,9 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sojson.common.controller.BaseController;
-import com.sojson.common.utils.MathUtil;
-import com.sojson.user.bo.SubmitDto;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 @Scope(value="prototype")
@@ -57,7 +55,8 @@ public class DemoTestSubmitController extends BaseController {
 			return  null;//提示错误
 		}	
 		
-		Map<String, String>  outMap = (Map<String, String> ) session.getAttribute(OUT_MAP);
+		Map<String, String[]> outMap = (Map<String, String[]>) session
+				.getAttribute(OUT_MAP);
 		//设置属性
 		SubmitDto dto  = new SubmitDto(outMap,request);
 		//各种业务完成后，删除相关信息。保证只能有效用一次

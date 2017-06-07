@@ -1,13 +1,11 @@
 package com.sojson.user.bo;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.codec.binary.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 /**
@@ -31,8 +29,8 @@ public class SubmitDto {
 	 * @param outMap
 	 * @param request
 	 */
-	public SubmitDto(Map<String, String> outMap, HttpServletRequest request) {
-		Map<String,String> requestMap = request.getParameterMap();
+	public SubmitDto(Map<String, String[]> outMap, HttpServletRequest request) {
+		Map<String, String[]> requestMap = request.getParameterMap();
 		
 		for (String key : requestMap.keySet()) {
 			if(outMap.containsValue(key)){
@@ -51,10 +49,10 @@ public class SubmitDto {
 	 * @param value
 	 * @return
 	 */
-	public String getKeyByValue(Map<String,String> outMap,String value){
+	public String getKeyByValue(Map<String, String[]> outMap, String value) {
 		for (String key : outMap.keySet()) {
-			String v = outMap.get(key);
-			if(StringUtils.equals(v, value)){
+			String[] v = outMap.get(key);
+			if (StringUtils.equals(v[0], value)) {
 				return key;
 			}
 		}
